@@ -1,0 +1,99 @@
+* Data Type
+
+There are 8 Basic Data Types in JavaScript
+
+
+** Number
+
+*** WHAT
+
+The number type repensents(代表) both integer and floating point number
+
+*** HOW
+
+#+begin_src js
+  let a: number;
+  let b: number = 2;
+  a = NaN;
+  console.log("Value:\n");
+  console.log("a = " + a + "\nb = " + b);
+  console.log("\nTypeof:\n");
+  console.log("typeof(a) = " + typeof(a) + "\ntypeof(b) = " + typeof(b))
+#+end_src
+
+*** ATTENTION
+
+Besides(除了) regular numbers, 3 special numberic values also belong to Number Type:
+
+1) Infinity
+   
+   正无穷
+   1 / 0 => Infinity
+   大于一切有限数
+   
+2) -Infinity
+   
+   负无穷
+   Infinity * -1 => -Infinity
+   小于一切有限数
+   
+3) NaN
+
+   NaN 代表一个计算错误，它是一个不正确的或者一个未定义的数学操作所得到的结果
+   任何对 NaN 的进一步数学运算都会返回 NaN
+   只有一个例外：NaN ** 0 结果为 1
+   
+   
+
+** String
+
+*** WHAT
+
+Basic Data Types
+
+
+** Bigint
+
+*** WHAT
+
+Basic Data Types
+
+
+
+** Boolean
+
+*** WHAT
+
+Basic Data Types
+
+
+
+** Undefined
+
+*** WHAT
+
+Basic Data Types
+
+
+** Null
+
+*** WHAT
+
+Basic Data Types
+
+
+** Symbol
+
+*** WHAT
+
+Basic Data Types
+
+
+** Object
+
+*** WHAT
+
+Basic Data Types
+
+** 
+

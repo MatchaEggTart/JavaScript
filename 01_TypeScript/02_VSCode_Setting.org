@@ -1,0 +1,51 @@
+* VS Code Settings for TypeScript
+
+** Open the Workspace Setting
+
+*** HOW
+
+1) Ctrl + Shift + P => Perferences: Open Workspace Settings
+
+2) Search Box => Type "TypeScript" => Extensions => TypeScript => Click
+
+3) Search "typescript inlay hints"
+
+   JavaScript > Inlay Hints > Parameter Types: Enabled
+
+4) Recommend Enable
+   Function Like Return Types (显示推导得到的函数返回值类型)
+   Parameter Names (显示函数入参的名称)
+   Parameter Types (显示函数入参的类型)
+   Variable Types (显示变量的类型)
+
+   
+** TypeScript Playground
+
+*** WHAT
+
+一个线上编写 TypeScript 的 网站
+
+[[https://www.typescriptlang.org/play][TypeScript Playground]]
+
+** enso
+
+*** WHAT
+
+Node.js runtime enhanced with esbuild for loading TypeScript & ESM
+
+即时编译执行 TypeScript 的包
+
+*** HOW
+
+**** 安装
+
+#+begin_src shell
+  sudo npm install -g esno
+#+end_src
+
+**** 使用
+
+#+begin_src shell
+  npm esno file.ts
+#+end_src
+
