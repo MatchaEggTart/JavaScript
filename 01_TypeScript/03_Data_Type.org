@@ -9,6 +9,8 @@ There are 8 Basic Data Types in JavaScript
 
 The number type repensents(代表) both integer and floating point number
 
+We’ll see more about working with numbers in the chapter [[https://javascript.info/number][Numbers]].
+
 *** HOW
 
 #+begin_src js
@@ -52,10 +54,55 @@ Besides(除了) regular numbers, 3 special numberic values also belong to Number
    
 
 ** String
-
 *** WHAT
 
-Basic Data Types
+A string in JS must be surround by quotes
+
+there are 3 types of quotes:
+
+1) Double quotes
+
+   #+begin_src js
+     let str1 = "Hello";
+   #+end_src
+   
+2) Single quotes
+
+   #+begin_src js
+     let str2 = 'World';  // same as Double quotes
+   #+end_src
+   
+3) Backticks
+
+   #+begin_src js
+     let phrase = `can embed another ${str}`;
+   #+end_src
+
+   Backticks are "extended functionality" quotes
+   They allow us to embed variables and expressions into a string by wrapping them in ${...}
+   e.g:
+   
+   #+begin_src js
+     let name = "John";
+
+     // embed a variable
+     alert(`Hello, ${name}!`);
+
+     // embed a expression
+     alert(`the result is ${1 + 2}`); // => 3
+   #+end_src
+
+   The expression inside `${}` is evaluated and the result becomes a part of string
+
+   We’ll cover strings more thoroughly in the chapter [[https://javascript.info/string][Strings]].
+
+*** ATTENTION
+In some languages, there is a special “character” type for a single character
+For example, in the C language and in Java it is called “char”
+
+In JavaScript, there is no such type
+There’s only one type: string
+A string may consist of zero characters (be empty), one character or many of them
 
 
 ** Bigint
@@ -96,7 +143,6 @@ A BigInt value is created by appending n to the end of an integer:
 
 As BigInt numbers are rarely needed, we don’t cover them here,
 but devoted them a separate chapter [[https://javascript.info/bigint][BigInt]]. Read it when you need such big numbers.
-
 
 *** ATTENTION
 
