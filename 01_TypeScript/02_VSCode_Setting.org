@@ -1,5 +1,6 @@
 * VS Code Settings for TypeScript
 
+
 ** Open the Workspace Setting
 
 *** HOW
@@ -27,8 +28,8 @@
 
 [[https://www.typescriptlang.org/play][TypeScript Playground]]
 
-** enso
 
+** enso
 *** WHAT
 
 Node.js runtime enhanced with esbuild for loading TypeScript & ESM
@@ -46,6 +47,6 @@ Node.js runtime enhanced with esbuild for loading TypeScript & ESM
 **** 使用
 
 #+begin_src shell
-  npm esno file.ts
+  npx esno file.ts
 #+end_src
 
