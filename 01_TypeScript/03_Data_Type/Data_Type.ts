@@ -26,5 +26,17 @@ let g: string = d + "=" + f; // not work
 console.log(e);
 console.log(g);
 
+console.log("Null");
+let h: null = null;
+console.log(typeof (h));
+let i: null;
+console.log(typeof (i));
 
-
+console.log("Null and Undefined");
+let myObject = null;
+console.log("\"myObject === null\":\t" + (myObject === null));
+let myVar;
+console.log("let myVar = undefined");
+console.log("\"myVar === undefined\":\t" + (myVar === undefined));
+console.log("\"myVar == null\":\t" + (myVar == null));
+console.log("\"myVar === null\":\t" + (myVar === null));
