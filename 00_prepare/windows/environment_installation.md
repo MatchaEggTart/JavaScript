@@ -41,6 +41,10 @@
     ```shell
     nvm use X.Y.Z
     ```
+  
+  * ATTENTION
+
+    安装完毕设置好需要重启才能启用 nvm 指令
 
 * 卸载版本
   
@@ -50,4 +54,61 @@
     nvm uninstall X.Y.Z
     ```
 
-## 
+## Nodejs
+
+* ATTENTION
+
+  ```log
+  npm : 无法加载文件 D:\Nodejs\nodejs\npm.ps1，因为在此系统上禁止运行脚本。有关详细信息，请参阅 https:/go.microsoft.com/f wlink/?LinkID=135170 中的 about_Execution_Policies。
+  ```
+
+  * 解决方法
+
+    ```powershell
+    get-ExecutionPolicy
+    => Restricted
+    set-ExecutionPolicy -Scope CurrentUser
+    => 位于命令管道位置 1 的 cmdlet Set-ExecutionPolicy  
+    => 请为以下参数提供值:
+    => ExecutionPolicy:
+    remotesigned
+    ```
+
+* 配置镜像
+
+  ```bash
+  npm config set registry https://registry.npmmirror.com/
+  npm config get registry
+  ```
+
+## Pnpm
+
+* 安装
+
+  ```powershell
+  npm install -g pnpm
+  ```
+
+* 配置镜像
+
+  ```bash
+  # 设置新的镜像地址
+  pnpm set registry https://registry.npmmirror.com
+  pnpm  config get registry
+  ```
+
+* 配置路径
+
+  ```bash
+  # 允许设置全局安装包的 bin 文件的目标目录。
+  pnpm config set global-bin-dir "D:\Nodejs\pnpm-store"
+  # 包元数据缓存的位置。
+  pnpm config set cache-dir "D:\Nodejs\pnpm-store\pnpm-cache"
+  # pnpm 创建的当前仅由更新检查器使用的 pnpm-state.json 文件的目录。
+  pnpm config set state-dir "D:\Nodejs\pnpm-store\pnpm-state"
+  # 指定储存全局依赖的目录。
+  pnpm config set global-dir "D:\Nodejs\pnpm-store\global"
+  # 所有包被保存在磁盘上的位置。
+  #（可选，以下这条命令可以选择不执行也是OK的）
+  pnpm config set store-dir "D:\Nodejs\pnpm-store\pnpm-store"
+  ```
