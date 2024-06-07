@@ -1,0 +1,252 @@
+* 事件处理
+
+
+** React 元素的事件处理
+
+*** WHAT
+
+React 元素的事件处理和 DOM 元素的很相似，但是有一点语法上的不同：
+
+#+begin_quote
+React 事件的命名采用小驼峰式（camelCase），而不是纯小写
+
+使用 JSX 语法时你需要传入一个函数作为事件处理函数，而不是一个字符串
+#+end_quote
+
+例如，传统的 HTML：
+
+#+begin_src html
+  <button onclick="activateLasers()">
+    Activate Lasers
+  </button>
+#+end_src
+
+在 React 中略微不同：
+
+#+begin_src html
+  <button onClick={activateLasers}>
+    Activate Lasers
+  </button>
+#+end_src
+
+在 React 中另一个不同点是你不能通过返回 false 的方式阻止默认行为
+
+你必须显式的使用 preventDefault 。例如，传统的 HTML 中阻止链接默认打开一个新页面，你可以这样写：
+
+#+begin_src html
+  <form onsubmit="console.log('You clicked submit.'); return false">
+    <button type="submit">Submit</button>
+  </form>
+#+end_src
+
+在 React 中，可能是这样的：
+
+#+begin_src js
+  function Form() {
+    function handleSubmit(e) {
+      e.preventDefault();
+      console.log('You clicked submit.');
+    }
+
+    return (
+      <form onSubmit={handleSubmit}>
+        <button type="submit">Submit</button>
+      </form>
+    );
+  }
+#+end_src
+
+在这里，e 是一个合成事件。React 根据 [[https://www.w3.org/TR/DOM-Level-3-Events/][W3C 规范]] 定义这些合成事件，所以你不需要担心跨浏览器的兼容性问题
+
+e 是事件对象
+
+React 事件与原生事件不完全相同。如果想了解更多，请查看 [[https://zh-hans.reactjs.org/docs/events.html][SyntheticEvent]] 参考指南
+
+使用 React 时，你一般不需要使用 addEventListener 为已创建的 DOM 元素添加监听器
+
+事实上，你只需要在该元素初始渲染的时候添加监听器即可
+
+当你使用 [[https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes][ES6 class]] 语法定义一个组件的时候，通常的做法是将事件处理函数声明为 class 中的方法
+
+例如，下面的 Toggle 组件会渲染一个让用户切换开关状态的按钮：
+
+#+begin_src js
+  class Toggle extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {isToggleOn: true};
+
+      // This binding is necessary to make `this` work in the callback
+      this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+      this.setState(prevState => ({
+        isToggleOn: !prevState.isToggleOn
+      }));
+    }
+
+    render() {
+      return (
+        <button onClick={this.handleClick}>
+          {this.state.isToggleOn ? 'ON' : 'OFF'}
+        </button>
+      );
+    }
+  }
+#+end_src
+
+你必须谨慎对待 JSX 回调函数中的 this，在 JavaScript 中，class 的方法默认不会[[https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind][绑定]] this
+
+如果你忘记绑定 this.handleClick 并把它传入了 onClick，当你调用这个函数的时候 this 的值为 undefined
+
+这并不是 React 特有的行为；这其实与 [[https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/][JavaScript 函数工作原理]] 有关
+
+通常情况下，如果你没有在方法后面添加 ()，例如 onClick={this.handleClick}，你应该为这个方法绑定 this
+
+如果觉得使用 bind 很麻烦，这里有两种方式可以解决
+
+你可以使用 [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields#public_instance_fields][public class fields]] 语法 to correctly bind callbacks:
+
+#+begin_src js
+  class LoggingButton extends React.Component {
+    // This syntax ensures `this` is bound within handleClick.
+    handleClick = () => {
+      console.log('this is:', this);
+    };
+    render() {
+      return (
+        <button onClick={this.handleClick}>
+          Click me
+        </button>
+      );
+    }
+#+end_src
+
+[[https://github.com/facebookincubator/create-react-app][Create React App]] 默认启用此语法
+
+如果你没有使用 class fields 语法，你可以在回调中使用[[https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions][箭头函数]]：
+
+#+begin_src js
+  class LoggingButton extends React.Component {
+    handleClick() {
+      console.log('this is:', this);
+    }
+
+    render() {
+      // This syntax ensures `this` is bound within handleClick
+      return (
+        <button onClick={() => this.handleClick()}>
+          Click me
+        </button>
+      );
+    }
+  }
+#+end_src
+
+此语法问题在于每次渲染 LoggingButton 时都会创建不同的回调函数
+
+在大多数情况下，这没什么问题，但如果该回调函数作为 prop 传入子组件时，这些组件可能会进行额外的重新渲染
+
+我们通常建议在构造器中绑定或使用 class fields 语法来避免这类性能问题
+
+*** HOW
+
+完整版
+
+#+begin_src js
+  function Form() {
+    // 虽然要用e，但事实证明还是只是参数名，随意
+    function handleSubmit(event) {
+      event.preventDefault();
+      console.log('You Click submit.');
+    }
+  
+    return (
+      <div className="Form">
+        <form onSubmit={handleSubmit}>
+          <button type="submit">Submit</button>
+        </form>
+        <br/>
+        <a href="https://www.baidu.com" onClick={handleSubmit}>去百度?(使用了e.preventDefault())</a>
+        <br/>
+        <a href="https://www.baidu.com">去百度?</a>
+        <br/>
+      </div>
+    )
+  }
+
+  export default Form;
+#+end_src
+
+#+begin_src js
+  import React from 'react';
+
+  class Toggle extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {isToggleOn: true};
+      // 为了方法中的this指向组件实例
+      this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+      // 您经常会看到开发人员通过以下方式更新状态
+      // 这比下面的方法不可靠，因为状态可以异步更新，并且我们不应该依赖其值来计算下一个状态
+      /*
+        this.setState({
+        isToggleOn: !this.state.isToggleOn
+        })
+      ,*/
+      // 加括号的函数体返回对象字面量表达式：
+      // prevstate 只是型参名，叫什么都每所谓，这里只是塑造功能，实现还是靠react
+      this.setState(a => ({
+        isToggleOn: !a.isToggleOn
+      }))
+      // 完整版
+      /*
+      this.setState(function(prevState) {
+        return {isToggleOn: !prevState.isToggleOn}
+      })
+      ,*/  
+    }
+
+    render() {
+      return (
+        <button onClick={this.handleClick}>
+          {this.state.isToggleOn? 'ON' : 'OFF'}
+        </button>
+      )
+    }
+  }
+
+  export default Toggle;
+#+end_src
+
+*** ATTENTION
+
+#+begin_quote
+Expected an assignment or function call and instead saw an expression  no-unused-expressions
+#+end_quote
+
+箭头函数后面不能是大括号{}，因为会看作代码快，如果要返回对象，请假如圆括号，即 => ()
+
+
+** 向事件处理程序传递参数
+
+*** WHAT
+
+在循环中，通常我们会为事件处理函数传递额外的参数
+
+例如，若 id 是你要删除那一行的 ID，以下两种方式都可以向事件处理函数传递参数：
+
+#+begin_src html
+  <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+  <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
+#+end_src
+
+上述两种方式是等价的，分别通过[[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions][箭头函数]]和 [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Function/bind][Function.prototype.bind]] 来实现
+
+在这两种情况下，React 的事件对象 e 会被作为第二个参数传递
+
+如果通过箭头函数的方式，事件对象必须显式的进行传递，而通过 bind 的方式，事件对象以及更多的参数将会被隐式的进行传递

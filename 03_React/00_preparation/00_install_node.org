@@ -1,0 +1,95 @@
+* Install Tools
+
+
+** Install Node.js
+
+*** HOW
+
+#+begin_src shell
+  sudo dnf install nodejs -y
+  node -v
+#+end_src
+
+
+** Update npm
+
+*** HOW
+
+#+begin_src shell
+  sudo npm install -g npm@latest
+  npm -v
+#+end_src
+
+
+** Setting mirror source
+
+*** HOW
+
+#+begin_src sh
+  npm config set registry https://registry.npmmirror.com/
+  npm config get registry
+#+end_src
+
+
+** Install Yarn
+
+*** HOW
+
+#+begin_src sh
+  sudo npm install -g yarn -y
+  yarn -v
+#+end_src
+
+
+** Install [[https://github.com/facebook/create-react-app][Create React App]]
+
+*** WHAT
+
+如果之前已经安装过 Create React App（npm install -g create-react-app），我们建议你卸载掉，然后使用 npx
+
+*** HOW
+
+#+begin_src shell
+  npm uninstall -g create-react-app
+  # or
+  yarn global remove create-react-app
+#+end_src
+
+
+** Check npm package is installed
+
+*** HOW
+
+#+begin_src shell
+  npm list -g --depth 0
+#+end_src
+
+
+** Install dependencies from package.json
+
+*** HOW
+
+#+begin_src shell
+  npm install
+#+end_src
+
+
+** Clean the cache
+
+*** HOW
+
+#+begin_src shell
+  npm cache clean --force
+#+end_src
+
+
+
+** Uninstall all the modules
+
+*** HOW
+
+#+begin_src shell
+  npm uninstall *
+  npm cache clean --force
+#+end_src
+

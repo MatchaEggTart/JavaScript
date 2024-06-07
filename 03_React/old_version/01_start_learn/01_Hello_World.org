@@ -1,0 +1,96 @@
+* Hello World
+
+** 备份 index.js
+
+*** HOW
+
+#+begin_src shell
+  cp index.js index-backup.js
+#+end_src
+
+** 创建 HelloWorld.js
+
+*** HOW
+
+#+begin_src js
+  function HelloWorld() {
+    return (
+      <h1>
+        Hello World!
+      </h1>
+    )
+  }
+
+  export default HelloWorld;
+#+end_src
+
+** 自己写一个 index.js
+
+*** HOW
+
+#+begin_src js
+  import React from 'react';
+  import ReactDOM from 'react-dom/client';
+  import reportWebVitals from './reportWebVitals';
+
+  import HelloWorld from './HelloWorld';
+
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+
+  root.render(
+    <React.StrictMode>
+      <HelloWorld />
+    </React.StrictMode>
+  )
+
+  reportWebVitals();
+#+end_src
+
+
+* 分析
+
+** react 与 react-dom
+
+*** WHAT
+
+react包负责 Web 和 Mobile 通用的核心部分，react-dom包 只做操控浏览器 DOM 相关的操作
+
+#+begin_quote
+参考：[[https://www.zhihu.com/question/336664883][为什么react和react-dom要分成两个包？]]
+#+end_quote
+
+** reportWebVitals
+
+*** WHAT
+
+web-vitals是Google发起的，旨在提供各种质量信号的统一指南，我们相信这些质量信号对提供出色的网络用户体验至关重要
+
+其可获取三个关键指标（CLS、FID、LCP）和两个辅助指标（FCP、TTFB）
+
+使用该功能，您可以将任何结果发送到分析端点，以测量和跟踪网站上的实际用户性能
+
+Largest Contentful Paint (LCP): 衡量加载性能，为了提供一个好的用户体验，LCP应该在2.5秒内
+
+First Input Delay (FID): 衡量可交互性。为了提供一个好的用户体验，FID应该在100毫秒内
+
+Cumulative Layout Shift (CLS): 衡量视觉稳定性。为了提供一个好的用户体验，CLS应该小于0.1
+
+#+begin_quote
+参考： [[https://zhuanlan.zhihu.com/p/401323863][react文件目录reportWebVitals]]
+#+end_quote
+
+** react 版本
+
+*** WHAT
+
+React 18 使用新的 root API，支持 new concurrent renderer（并发模式的渲染），它允许你进入concurrent mode（并发模式）
+
+旧版是 ReactDOM.render( 标签, DOM挂载)
+
+新版是 ReactDOM.createRoot(标签).render(DOM挂载)
+
+** React 是什么
+
+*** WHAT
+
+React 是一个声明式，高效且灵活的用于构建用户界面的 JavaScript 库。使用 React 可以将一些简短、独立的代码片段组合成复杂的 UI 界面，这些代码片段被称作“组件”

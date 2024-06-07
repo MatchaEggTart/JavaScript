@@ -1,0 +1,169 @@
+* Start
+
+
+** Add React to HTML
+
+*** WHAT
+
+在网站中添加 React
+
+*** HOW
+
+1. 创建一个 index.html
+   
+   #+begin_src html
+     <!doctype html>
+     <html lang="en">
+       <head>
+         <meta charset="UTF-8"/>
+         <title>Document</title>
+       </head>
+       <body>
+       </body>
+     </html>
+   #+end_src
+   
+2. 在 index.html 的 <body>标签 添加一个 <div>标签，使用id属性，准备引入 react组件
+   
+   #+begin_src html
+     <div id="react-container"></div>
+   #+end_src
+
+3. 添加 <script>标签，引入 react，需要在 </body>结束标签前
+   
+   #+begin_src html
+     <!-- 加载 React。-->                                                                            
+     <!-- 注意: 部署时，将 "development.js" 替换为 "production.min.js"。-->                          
+     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>              
+     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+     <!-- 加载 Bable，使用JSX -->
+     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+   #+end_src
+
+4. 创建一个 React组件，在 index.html同级目录下创建 container.js
+   
+   #+begin_src js
+     function c() {
+       const element = (
+         <div>
+         <h1>Hello, World!</h1>
+         <h2>It is {new Date().toLocaleTimeString()}.</h2>
+         </div>
+       );
+       ReactDOM.render(element, document.getElementById('react-container'));
+     }
+     setInterval(c, 1000);
+   #+end_src
+
+5. 在 index.html 导入 container.js
+   
+    #+begin_src html
+      <!-- 加载组件 -->
+      <script type="text/babel" src="container.js"></script>
+    #+end_src
+
+6. 会 Warning
+   
+   #+begin_quote
+   Warning: ReactDOM.render is no longer supported in React 18. Use createRoot instead. Until you switch to the new API, your app will behave as if it's running React 17. Learn more: https://reactjs.org/link/switch-to-createroot
+   #+end_quote
+
+   因为 React 18 不再支持 ReactDOM.render()，所以要修改 container.js
+   
+   #+begin_src js
+     function c() {
+       const element = (
+         <div>
+         <h1>Hello, World!</h1>
+         <h2>It is {new Date().toLocaleTimeString()}.</h2>
+         </div>
+       );
+       // ReactDOM.render(element, document.getElementById('react-container'));
+       const container = ReactDOM.createRoot(document.getElementById('react-container'));
+       container.render(element);
+     }
+
+     setInterval(c, 1000);
+   #+end_src
+
+   还是会 Warning
+   
+   #+begin_quote
+   Warning: You are calling ReactDOMClient.createRoot() on a container that has already been passed to createRoot() before. Instead, call root.render() on the existing root instead if you want to update it.
+   #+end_quote
+
+   原因在于 setInterval()，多次调用 function c 导致ReactDOM.createRoot()多次使用，但实际上 createRoot()只能使用一次，所以应该修改 container.js
+   
+   #+begin_src js
+     /*
+       function c() {
+       const element = (
+       <div>
+       <h1>Hello, World!</h1>
+       <h2>It is {new Date().toLocaleTimeString()}.</h2>
+       </div>
+       );
+       // ReactDOM.render(element, document.getElementById('react-container'));
+       const container = ReactDOM.createRoot(document.getElementById('react-container'));
+       container.render(element);
+       }
+
+       setInterval(c, 1000);
+     ,*/
+
+     const root = ReactDOM.createRoot(document.getElementById('react-container'));
+
+     function tick() {
+       const element = (
+         <div>
+           <h1>Hello World!</h1>
+           <h2>It is {new Date().toLocaleTimeString()}.</h2>
+         </div>
+       )
+       // ReactDOM.createRoot(document.getElementById('react-container')).render(element);
+       root.render(element);
+     }
+     setInterval(tick, 1000);
+   #+end_src
+
+   
+** npx
+
+*** WHAT
+
+npx 主要用于命令行的寻址等辅助功能上（包执行器），而 npm 是管理依赖的
+
+npm -g install 会实现全局安装，但是 npx 可以临时安装 可执行依赖包，不用全局安装
+
+*** HOW
+
+#+begin_src shell
+  npx create-react-app learn-react-app
+#+end_src
+
+*** ATTENTION
+
+#+begin_quote
+npm WARN deprecated tar@2.2.2: This version of tar is no longer supported, and will not receive security updates. Please upgrade asap.
+#+end_quote
+
+可能使用 npm update tar -g （全局更新） 或 npm update tar --save（项目内更新）解决吧？
+
+
+** Create a New React App
+
+*** WHAT
+
+使用 create-react-app 创建[[https://react.docschina.org/docs/glossary.html#single-page-application][单页应用]]
+
+*** HOW
+
+使用 npx 调用 create-react-app 创建应用
+
+#+begin_src shell
+  npx create-react-app learn-react-app
+  cd learn-react-app
+  npm start
+#+end_src
+
+第一时间需要创建 .gitignore 文件，可以使用 [[https://www.toptal.com/developers/gitignore][gitignore.io]] 来快速生成

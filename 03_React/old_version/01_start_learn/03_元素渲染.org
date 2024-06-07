@@ -1,0 +1,195 @@
+* 元素渲染
+
+
+** 元素
+
+*** WHAT
+
+元素是构成 React 应用的最小砖块
+
+元素描述了你在屏幕上想看到的内容
+
+#+begin_src js
+  const element = <h1>Hello, world</h1>;
+#+end_src
+
+与浏览器的 DOM 元素不同，React 元素是创建开销极小的普通对象
+
+React DOM 会负责更新 DOM 来与 React 元素保持一致
+
+*** ATTENTION
+
+元素不是组件，不要混淆，组件是由元素构成的
+
+
+** 将一个元素渲染为 DOM
+
+*** WHAT
+
+假设你的 HTML 文件某处有一个 <div>:
+
+#+begin_src html
+  <div id="root"></div>
+#+end_src
+
+我们将其称为“根”(root) DOM 节点，因为该节点内的所有内容都将由 React DOM 管理
+
+React 构建的应用只有单一的根DOM节点，只有在 React集成的应用，才可能有多个独立根节点
+
+React 18 以前，将 React元素传入 [[https://react.docschina.org/docs/react-dom.html#render][ReactDOM.render()]] ，然后就能将元素渲染到DOM节点
+
+React 18 以后，将 DOM节点传入 [[https://reactjs.org/docs/react-dom-client.html#createroot][ReactDOM.createRoot() ]]生成 root 对象，然后将 React元素传入 root.render()
+
+*** HOW
+
+#+begin_src js
+  // React 18 以前
+  const element = <h1>Hello World</h1>;
+  ReactDOM.render(element, document.getelementbyid('root'));
+  
+  // React 18 以后
+  const element = <h1>Hello World</h1>;
+  const root = ReactDOM.createRoot(document.getelementbyid('root'));
+  root.render(element);
+#+end_src
+
+*** WHY
+
+为什么要有新的API
+
+#+begin_quote
+[[https://juejin.cn/post/6992435557456412709][首先，这修复了 API 在运行更新时的一些人类工程学问题。如上所示，在 Legacy API 中，你需要多次将容器元素传递给 render，即使它从未更改过。这也意味着我们不需要将根元素存储在 DOM 节点上，尽管我们今天仍然这样做。其次，这一变化允许让我们可以移除 hydrate 方法并替换为 root 上的一个选项；删除渲染回调。这些回调在部分 hydration 中是没有意义的]]
+#+end_quote
+
+
+** 更新已渲染的元素
+
+*** WHAT
+
+React 元素是[[https://en.wikipedia.org/wiki/Immutable_object][不可变对象]]
+
+一旦被创建，你就无法更改它的子元素或者属性
+
+一个元素就像电影的单帧：它代表了某个特定时刻的 UI
+
+根据我们已有的知识，更新 UI 唯一的方式是创建一个全新的元素，并将其传入 root.render()
+
+*** HOW
+
+1. 在html添加react
+   
+   #+begin_src js
+     const root = ReactDOM.createRoot(
+       document.getElementById('root')
+     );
+
+     function tick() {
+       const element = (
+         <div>
+           <h1>Hello, world!</h1>
+           <h2>It is {new Date().toLocaleTimeString()}.</h2>
+         </div>
+       );
+       root.render(element);
+     }
+
+     setInterval(tick, 1000);
+   #+end_src
+
+2. 使用类组件
+   
+   #+begin_src js
+     import React from 'react';
+
+     //转自: https://www.bilibili.com/video/BV1tV411m7Qo/?spm_id_from=333.999.0.0
+
+     // 传统类组件
+     class Timer01 extends React.Component {
+
+       // 组件的状态
+       state = {
+         time: new Date()
+       };
+
+       tick = () => {
+         this.setState((state) => {
+           return { time: new Date() };
+         });
+       }
+
+       timer = null;
+
+       // 利用 componDidMount 这个生命函数实现时间实时更新
+       componentDidMount() {
+         // 每一秒触发一次 tick函数
+         this.timer = setInterval(this.tick, 1000);
+       }
+
+       // 利用 componetWillUnmount 生命函数卸载定时器
+       componentWillUnmount() {
+         clearInterval(this.timer);
+       }
+  
+       render() {
+         return (
+           <div>
+             <h1>Timer01</h1>
+             <span>It's {this.state.time.toLocaleString()}.</span>
+           </div>
+         );
+       }
+     }
+
+     export default Timer01;
+   #+end_src   
+
+3. 使用React Hook
+   
+   #+begin_src js
+     import React, { useState, useEffect } from 'react';
+
+     //转自: https://www.bilibili.com/video/BV1tV411m7Qo/?spm_id_from=333.999.0.0
+
+     // React Hook 函数组件
+
+     const Timer02 = () => {
+       // useState 来控制时间状态
+       const [time, setTime] = useState(new Date());
+
+       const tick = () => {
+         setTime(new Date());
+       }
+       // useEffect 来实现自动更新时间
+       // useEffect 包含了 componentDidMount/componentWillUnmount
+       useEffect(() => {
+         // react-native setTimeout不会实时更新，要用 setInterval
+         // setTimeout(tick, 1000);
+         setInterval(tick, 1000);
+       }, [time]);
+       return (
+         <div>
+           <h1>Timer02</h1>
+           <span>It's {time.toLocaleString()}.</span>
+         </div>
+       )
+     }
+
+     export default Timer02;
+   #+end_src
+      
+*** ATTENTION
+
+在实践中，大多数 React 应用只会调用一次 ReactDOM.render()/root.render
+
+
+** React 只更新它需要更新的部分
+
+*** WHAT
+
+React DOM 会将元素和它的子元素与它们之前的状态进行比较，并只会进行必要的更新来使 DOM 达到预期的状态
+
+你可以使用浏览器的检查元素工具查看上一个例子来确认这一点
+
+尽管每一秒我们都会新建一个描述整个 UI 树的元素，React DOM 只会更新实际改变了的内容，也就是例子中的文本节点
+
+根据我们的经验，考虑 UI 在任意给定时刻的状态，而不是随时间变化的过程，能够消灭一整类的 bug
