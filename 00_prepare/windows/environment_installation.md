@@ -83,6 +83,10 @@
 
 ## Pnpm
 
+* ATTENTION
+
+  在 Windows 用挺难的，这里暂时放弃吧
+
 * 安装
 
   ```powershell
