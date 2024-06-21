@@ -1,5 +1,25 @@
 # 环境安装
 
+## 配置 PowerShell
+
+* ATTENTION
+
+  ```log
+  npm : 无法加载文件 D:\Nodejs\nodejs\npm.ps1，因为在此系统上禁止运行脚本。有关详细信息，请参阅 https:/go.microsoft.com/f wlink/?LinkID=135170 中的 about_Execution_Policies。
+  ```
+
+  * 解决方法
+
+    ```powershell
+    get-ExecutionPolicy
+    => Restricted
+    set-ExecutionPolicy -Scope CurrentUser
+    => 位于命令管道位置 1 的 cmdlet Set-ExecutionPolicy  
+    => 请为以下参数提供值:
+    => ExecutionPolicy:
+    remotesigned
+    ```
+
 ## Nvm 安装
 
 * [地址](https://github.com/coreybutler/nvm-windows)
@@ -55,24 +75,6 @@
     ```
 
 ## Nodejs
-
-* ATTENTION
-
-  ```log
-  npm : 无法加载文件 D:\Nodejs\nodejs\npm.ps1，因为在此系统上禁止运行脚本。有关详细信息，请参阅 https:/go.microsoft.com/f wlink/?LinkID=135170 中的 about_Execution_Policies。
-  ```
-
-  * 解决方法
-
-    ```powershell
-    get-ExecutionPolicy
-    => Restricted
-    set-ExecutionPolicy -Scope CurrentUser
-    => 位于命令管道位置 1 的 cmdlet Set-ExecutionPolicy  
-    => 请为以下参数提供值:
-    => ExecutionPolicy:
-    remotesigned
-    ```
 
 * 配置镜像
 
