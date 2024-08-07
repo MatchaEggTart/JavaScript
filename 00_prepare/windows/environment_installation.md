@@ -83,6 +83,14 @@
   npm config get registry
   ```
 
+## VScode 插件
+
+* Code Runner
+
+  ``` sh
+  npm install -g ts-node # 直接编译 ts文件
+  ```
+
 ## Pnpm
 
 * ATTENTION
