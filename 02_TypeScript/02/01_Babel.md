@@ -313,4 +313,38 @@
     console.log(a + " + " + b + ' =\t', result);
     ```
 
-  
+  * 打开 package.json，在 script 字段添加通过 Babel 编译工具编译 TypeScript 代码的配置信息
+
+    ``` json
+
+    "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel": "babel src --out-dir lib --extensions \".ts"
+    },
+    ```
+
+    * 解析
+
+      babel命令指定了源文件目录 src，通过 参数 --out-dir 指定编译后文件目录 lib，--extensions 指定编译后文件后缀为 .ts
+
+      实际等于在终端执行命令
+
+        ``` bash
+        .\node_modules\.bin\babel src --out-dir lib --extensions .ts
+        ```
+
+  * 编译
+
+    ``` bash
+    npm run babel
+    ```
+
+    * 解析
+
+      调用了 @babel/cli 模块执行编译
+
+  * 执行代码
+
+    ``` bash
+    node .\lib\add.js
+    ```
