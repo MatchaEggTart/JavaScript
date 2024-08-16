@@ -222,11 +222,18 @@
                         "proposals": true
                     }
                 }
-            ]
+            ],
+            // typescript必须带上
+            "@babel/typescript"
         ],
+
         "plugins": [
             // 这是下面装了插件再添加
-            "@babel/plugin-transform-arrow-functions"
+            "@babel/plugin-transform-arrow-functions",
+            // 用于转换语法特性“类属性”
+            "@babel/plugin-proposal-class-properties",
+            // 用于转换语法特性“对象扩展”
+            "@babel/plugin-proposal-object-rest-spread"
         ]
     }
     ```
