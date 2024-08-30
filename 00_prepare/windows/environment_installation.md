@@ -89,7 +89,7 @@
 
   ``` txt
   init-author-name=MatchaEggTart
-  init-author-email=MatchaEggTart@hotmail.com
+  init-aussthor-email=MatchaEggTart@hotmail.com
   init-author-url=
   init-license=
   ```
