@@ -83,6 +83,17 @@
   npm config get registry
   ```
 
+## 配置 姓名邮箱
+
+* npmrc
+
+  ``` txt
+  init-author-name=MatchaEggTart
+  init-author-email=MatchaEggTart@hotmail.com
+  init-author-url=
+  init-license=
+  ```
+
 ## VScode 插件
 
 * Code Runner
