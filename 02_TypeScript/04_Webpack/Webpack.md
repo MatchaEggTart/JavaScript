@@ -283,7 +283,7 @@
 
       ``` sh
       npm install --save-dev webpack webpack-cli copy-webpack-plugin
-        ```
+      ```
 
   3. 安装 typescript 模块
 
