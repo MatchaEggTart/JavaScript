@@ -58,6 +58,12 @@
 
 * 安装版本
 
+  * 安装稳定版
+
+    ```bash
+    nvm install lts
+    ```
+
   * 安装最新版
 
     ```bash
