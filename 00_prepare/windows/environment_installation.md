@@ -2,10 +2,17 @@
 
 ## 配置 ssh
 
-* 指令
+* ssh指令
 
   ```sh
   ssh-keygen -t rsa -C "邮箱"
+  ```
+
+* git 配置用户名邮箱
+
+  ```sh
+  git config --global user.email "邮箱"
+  git config --global user.name "用户名"
   ```
 
 ## 配置 PowerShell
