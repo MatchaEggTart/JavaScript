@@ -1,5 +1,13 @@
 # 环境安装
 
+## 配置 ssh
+
+* 指令
+
+  ```sh
+  ssh-keygen -t rsa -C "邮箱"
+  ```
+
 ## 配置 PowerShell
 
 * ATTENTION
