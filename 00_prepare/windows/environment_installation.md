@@ -39,7 +39,16 @@
 
 * [地址](https://github.com/coreybutler/nvm-windows)
 
+* 安装路径
+
+  * 最好是
+
+    D:\Nodejs\nvm
+
+    D:\Nodejs\nodejs
+
 * 设置镜像
+
   * 在 nvm文件夹的 settings.txt 文件下添加配置
   
     ``` powershell
@@ -101,6 +110,10 @@
 ## 配置 姓名邮箱
 
 * npmrc
+
+  * 位置
+  
+    D:\Nodejs\nodejs\node_modules\npm\.npmrc
 
   ``` txt
   init-author-name=MatchaEggTart
