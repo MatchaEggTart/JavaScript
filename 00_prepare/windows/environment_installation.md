@@ -35,6 +35,26 @@
     remotesigned
     ```
 
+## 安装 oh-my-posh
+
+* 指令
+
+  ``` powershell
+  winget install JanDeDobbeleer.OhMyPosh -s winget
+  ```
+  
+  ``` powershell
+  code $PROFILE
+  ```
+
+  ``` ps
+  oh-my-posh init pwsh | Invoke-Expression
+  ```
+
+  ``` powershell
+  oh-my-posh.exe disable notice
+  ```
+  
 ## Nvm 安装
 
 * [地址](https://github.com/coreybutler/nvm-windows)
