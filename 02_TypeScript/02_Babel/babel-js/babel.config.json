@@ -1,23 +1,23 @@
 {
-    // 预置
-    "presets": [
-        [
-            "@babel/env",
-            {
-                "targets": {
-                    "node": "current"
-                },
-                "useBuiltIns": "usage",
-                "corejs": {
-                    "version": 3,
-                    // TODO：允许使用“提议”阶段特性的polyfill
-                    "proposals": true
-                }
-            }
-        ]
-    ],
-    "plugins": [
-        // 这是下面装了插件再添加
-        "@babel/plugin-transform-arrow-functions"
+  // 预置
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": {
+          "node": "current"
+        },
+        "useBuiltIns": "usage",
+        "corejs": {
+          "version": 3,
+          // TODO：允许使用“提议”阶段特性的polyfill
+          "proposals": true
+        }
+      }
     ]
+  ],
+  "plugins": [
+    // 这是下面装了插件再添加
+    "@babel/plugin-transform-arrow-functions"
+  ]
 }

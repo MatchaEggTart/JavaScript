@@ -97,27 +97,27 @@
 
       ``` json
       {
-          // 预置
-          "presets": [
-              [
-                  "@babel/env",
-                  {
-                      "targets": {
-                          "node": "current"
-                      },
-                      "useBuiltIns": "usage",
-                      "corejs": {
-                          "version": 3,
-                          // TODO：允许使用“提议”阶段特性的polyfill
-                          "proposals": true
-                      }
-                  }
-              ]
-          ],
-          "plugins": [
-              // 这是下面装了插件再添加
-              "@babel/plugin-transform-arrow-functions"
+        // 预置
+        "presets": [
+          [
+            "@babel/env",
+            {
+              "targets": {
+                "node": "current"
+              },
+              "useBuiltIns": "usage",
+              "corejs": {
+                "version": 3,
+                // TODO：允许使用“提议”阶段特性的polyfill
+                "proposals": true
+              }
+            }
           ]
+        ],
+        "plugins": [
+          // 这是下面装了插件再添加
+          "@babel/plugin-transform-arrow-functions"
+        ]
       }
       ```
 
@@ -207,34 +207,34 @@
 
     ``` json
     {
-        // 预置
-        "presets": [
-            [
-                "@babel/env",
-                {
-                    "targets": {
-                        "node": "current"
-                    },
-                    "useBuiltIns": "usage",
-                    "corejs": {
-                        "version": 3,
-                        // TODO：允许使用“提议”阶段特性的polyfill
-                        "proposals": true
-                    }
-                }
-            ],
-            // typescript必须带上
-            "@babel/typescript"
+      // 预置
+      "presets": [
+        [
+          "@babel/env",
+          {
+            "targets": {
+              "node": "current"
+            },
+            "useBuiltIns": "usage",
+            "corejs": {
+              "version": 3,
+              // TODO：允许使用“提议”阶段特性的polyfill
+              "proposals": true
+            }
+          }
         ],
+        // typescript必须带上
+        "@babel/typescript"
+      ],
 
-        "plugins": [
-            // 这是下面装了插件再添加
-            "@babel/plugin-transform-arrow-functions",
-            // 用于转换语法特性“类属性”
-            "@babel/plugin-proposal-class-properties",
-            // 用于转换语法特性“对象扩展”
-            "@babel/plugin-proposal-object-rest-spread"
-        ]
+      "plugins": [
+        // 这是下面装了插件再添加
+        "@babel/plugin-transform-arrow-functions",
+        // 用于转换语法特性“类属性”
+        "@babel/plugin-proposal-class-properties",
+        // 用于转换语法特性“对象扩展”
+        "@babel/plugin-proposal-object-rest-spread"
+      ]
     }
     ```
 
@@ -263,33 +263,34 @@
 
       ``` json
       {
-          // 预置
-          "presets": [
-              [
-                  "@babel/env",
-                  {
-                      "targets": {
-                          "node": "current"
-                      },
-                      "useBuiltIns": "usage",
-                      "corejs": {
-                          "version": 3,
-                          // TODO：允许使用“提议”阶段特性的polyfill
-                          "proposals": true
-                      }
-                  }
-              ],
-              "@babel/typescript",
+      {
+        // 预置
+        "presets": [
+          [
+            "@babel/env",
+            {
+              "targets": {
+                "node": "current"
+              },
+              "useBuiltIns": "usage",
+              "corejs": {
+                "version": 3,
+                // TODO：允许使用“提议”阶段特性的polyfill
+                "proposals": true
+              }
+            }
           ],
+          "@babel/typescript",
+        ],
 
-          "plugins": [
-              // 这是下面装了插件再添加
-              "@babel/plugin-transform-arrow-functions",
-              // 用于转换语法特性“类属性”
-              "@babel/plugin-proposal-class-properties",
-              // 用于转换语法特性“对象扩展”
-              "@babel/plugin-proposal-object-rest-spread",
-          ]
+        "plugins": [
+          // 这是下面装了插件再添加
+          "@babel/plugin-transform-arrow-functions",
+          // 用于转换语法特性“类属性”
+          "@babel/plugin-proposal-class-properties",
+          // 用于转换语法特性“对象扩展”
+          "@babel/plugin-proposal-object-rest-spread",
+        ]
       }
       ```
 
@@ -305,28 +306,26 @@
 
     ``` ts
     /*
-    * 
+    * add.ts
     */
+    const a: number = 2;
+    const b: number = 3;
 
-    const a: number = 1;
-    const b: number = 2;
-
-    function add(x: number, y: number) : number {
-        return x + y;
+    function add(x: number, y: number): number {
+      return x + y;
     }
 
     const result: number = add(a, b);
 
-    console.log(a + " + " + b + ' =\t', result);
+    console.log(a + " + " + b + " = " + result);
     ```
 
   * 打开 package.json，在 script 字段添加通过 Babel 编译工具编译 TypeScript 代码的配置信息
 
     ``` json
-
     "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "babel": "babel src --out-dir lib --extensions \".ts"
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "babel": "babel src --out-dir lib --extensions .ts"
     },
     ```
 

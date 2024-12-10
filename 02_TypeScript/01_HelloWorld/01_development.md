@@ -46,13 +46,24 @@
     New-Item helloWorld.ts -type file
     ```
 
+    ``` bash
+    touch helloWorld.ts
+    ```
+
   * .\helloworld-tsconfig\helloWorld.ts
 
     ``` ts
     function sayHello(msg: string) :void {
-    console.log(`Hello World! ${msg}`);
+      console.log(`Hello World! ${msg}`);
     }
+    
     sayHello('This is a TypeScript code.');
+    ```
+
+  * 编译指令
+
+    ``` bash
+    tsc --project tsconfig.json
     ```
 
   * 编译快捷键

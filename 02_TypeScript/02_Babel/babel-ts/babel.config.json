@@ -15,7 +15,7 @@
                 }
             }
         ],
-        "@babel/typescript"
+        "@babel/typescript",
     ],
 
     "plugins": [
@@ -24,6 +24,6 @@
         // 用于转换语法特性“类属性”
         "@babel/plugin-proposal-class-properties",
         // 用于转换语法特性“对象扩展”
-        "@babel/plugin-proposal-object-rest-spread"
+        "@babel/plugin-proposal-object-rest-spread",
     ]
 }
