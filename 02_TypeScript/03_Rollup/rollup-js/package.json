@@ -5,14 +5,14 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "rollup -c --environment INCLUDE_DEPS,BUILD:development",
-    "build": "rollup -c --environment INCLUDE_DEPS,BUILD:production"
+    "dev": "rollup -c --environment INCLUDING_DEPS,BUILD:development",
+    "build": "rollup -c --environment INCLUDING_DEPS,BUILD:production"
   },
   "author": "MatchaEggTart",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@rollup/plugin-terser": "^0.4.4",
-    "rollup": "^4.20.0"
+    "rollup": "^4.28.1",
+    "@rollup/plugin-terser": "^0.4.4"
   }
 }

@@ -12,12 +12,12 @@ export default {
     {
       file: 'dist/main.bundle.js',
       // 输出文件格式
-      format: 'cjs',
+      format: 'cjs'
     },
     {
       file: 'dist/main.es.js',
       // 输出文件格式
-      format: 'es',
+      format: 'es'
     },
     {
       file: 'dist/main.min.js',
@@ -26,6 +26,6 @@ export default {
       name: 'version',
       // 代码压缩插件
       plugins: [terser()]
-    },
+    }
   ]
-};
+}

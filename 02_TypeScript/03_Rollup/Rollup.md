@@ -41,6 +41,13 @@
       npm init
       ```
 
+      ``` bash
+      mkdir rollup-js          
+      cd rollup-js             
+      mkdir -p src/modules dist
+      npm init                 
+      ```
+
   2. 安装插件
 
       ``` sh
@@ -66,17 +73,31 @@
       New-Item rollup.config.js -type file
       ```
 
+      ``` bash
+      touch rollup.config.js && cd src && touch main.js modules/hello.js modules/bye.js
+      tree src
+      src
+      ├── main.js
+      └── modules
+          ├── bye.js
+          └── hello.js
+      ```
+
+      rollup.config.js 这个文件名是固定的，千万别试着改名字
+
   4. main.js
 
       ``` js
       /**
        * main entry function.
-      */
+       */
       import { sayHelloTo } from './modules/hello';
       import { sayByeTo } from './modules/bye';
+
       const resHello = sayHelloTo('king');
+      const resBye = sayByeTo('queen');
+
       console.log(resHello);
-      const resBye = sayByeTo('king');
       console.log(resBye);
       ```
 
@@ -84,10 +105,10 @@
 
       ``` js
       /**
-      * Says hello function.
-      */
+       * Says hello function.
+       */
       export function sayHelloTo(name) {
-        const toSay = `Hello, ${name}!`;
+        const toSay = `Hello, ${name} !`;
         // TODO: return
         return toSay;
       }
@@ -97,10 +118,10 @@
 
       ``` js
       /**
-      * Says goodbye function
-      */
+       * Says goodbye function
+       */
       export function sayByeTo(name) {
-        const toSay = `See you, ${name}!`;
+        const toSay = `GoodBye, ${name} !`;
         // TODO: return
         return toSay;
       }
@@ -110,11 +131,12 @@
 
       ``` js
       /**
-      * rollup config file+
-      */
+       * rollup config file+
+       */
       // 代码压缩插件
       // import json from '@rollup/plugin-json';
       import terser from '@rollup/plugin-terser';
+
       export default {
         // 入口文件
         input: 'src/main.js',
@@ -122,12 +144,12 @@
           {
             file: 'dist/main.bundle.js',
             // 输出文件格式
-            format: 'cjs',
+            format: 'cjs'
           },
           {
             file: 'dist/main.es.js',
             // 输出文件格式
-            format: 'es',
+            format: 'es'
           },
           {
             file: 'dist/main.min.js',
@@ -136,9 +158,9 @@
             name: 'version',
             // 代码压缩插件
             plugins: [terser()]
-          },
+          }
         ]
-       };
+      }
       ```
 
   8. 配置 package.json
@@ -187,6 +209,17 @@
       (node:11176) Warning: To load an ES module, set "type": "module" in the package.json or use the .mjs extension.
       ```
 
+  * json 文件逗号问题
+
+    ``` Warning
+    npm error code EJSONPARSE
+    npm error JSON.parse Expected double-quoted property name in JSON at position 217 (line 11 column 1) while parsing near "... \"description\": \"\",\n}\n"
+    npm error JSON.parse Failed to parse JSON data.                                                                                                          
+    npm error JSON.parse Note: package.json must be actual JSON, not just JavaScript.                                                                        
+    ```
+
+    这是因为 package.json 每个 属性最后都不能有 逗号（,）
+
 * 解析
 
   * rollup.config.js
@@ -219,6 +252,13 @@
       mkdir dist
       npm init
       ```
+
+      ``` bash
+      mkdir rollup-ts          
+      cd rollup-ts            
+      mkdir -p src/modules dist
+      npm init
+      ```
   
   2. 安装 TypeScript 依赖
 
@@ -238,6 +278,10 @@
 
       ``` sh
       NEW-ITEM rollup.config.js -TYPE file
+      ```
+
+      ``` bash
+      touch rollup.config.js
       ```
 
       ``` js
@@ -285,7 +329,33 @@
       "module": "ESNext",
       ```
 
-  6. rollup-ts/src/moudules/hello.ts
+  6. package.json
+
+      ``` json
+      {
+        "name": "rollup-ts",
+        "version": "1.0.0",
+        "main": "index.js",
+        "type": "module", /* 加载 ES 模块 */
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1",
+          "dev": "rollup -c --environment INCLUDE_DEPS,BUILD:development",
+          "build": "rollup -c --environment INCLUDE_DEPS,BUILD:production"
+        },
+        "author": "MatchaEggTart",
+        "license": "ISC",
+        "description": "",
+        "devDependencies": {
+          "@rollup/plugin-terser": "^0.4.4",
+          "rollup": "^4.28.1",
+          "rollup-plugin-clear": "^2.0.7",
+          "rollup-plugin-typescript2": "^0.36.0",
+          "typescript": "^5.7.2"
+        }
+      }
+      ```
+
+  7. rollup-ts/src/moudules/hello.ts
 
       ``` ts
       /**
@@ -299,7 +369,7 @@
       }
       ```
 
-  7. rollup-ts/src/moudules/bye.ts
+  8. rollup-ts/src/moudules/bye.ts
 
       ``` ts
       /**
@@ -313,7 +383,7 @@
       }
       ```
 
-  8. rollup-ts/src/main.ts
+  9. rollup-ts/src/main.ts
 
       ``` ts
       /**
@@ -329,13 +399,13 @@
       console.log(resBye);
       ```
 
-  9. 编译
+  10. 编译
 
       ``` sh
       npm run dev
       ```
 
-  10. 执行
+  11. 执行
 
       ``` sh
       node ./dist/main.bundle.ts.js
