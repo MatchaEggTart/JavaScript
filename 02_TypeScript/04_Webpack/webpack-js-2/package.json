@@ -1,7 +1,7 @@
 {
-  "name": "webpack-ts",
+  "name": "webpack-js-2",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
@@ -10,10 +10,9 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^12.0.2",
-    "ts-loader": "^9.5.1",
-    "typescript": "^5.5.4",
-    "webpack": "^5.94.0",
+    "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4"
   }
 }

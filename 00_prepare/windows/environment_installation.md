@@ -121,6 +121,7 @@
   * 指令
 
     ```shell
+    nvm deactivate
     nvm uninstall X.Y.Z
     ```
 
