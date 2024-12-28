@@ -161,6 +161,7 @@
           <p></p>
 
         </body>
+
         <script type="text/javascript" src="bundle.js"></script>
       </html>
       ```
@@ -199,7 +200,7 @@
         "main": "index.js",
         "scripts": {
           "test": "echo \"Error: no test specified\" && exit 1",
-          // 定义适用 webpack 工具
+          // 定义使用 webpack 工具
           "build": "webpack"
         },
         "author": "MatchaEggTart",
@@ -249,7 +250,7 @@
   2. 安装 webpack 工具所需的 webpack-cli 命令行工具（webpack工具自身的命令行工具）和 webpack 工具的核心模块，copy-webpack-plugin 是将 html 复制到 dist 的插件
 
       ``` sh
-      npm install --save-dev webpack webpack-cli copy-webpack-plugin
+      npm install --save-dev webpack webpack-cli copy-webpack-plugin clean-webpack-plugin
       ```
 
   3. webpack-js-2/src/index.js
@@ -278,10 +279,13 @@
       </head>
 
       <body>
+
         <h3>Webpack Web App 2</h3>
 
         <p></p>
+
       </body>
+
       <script type="text/javascript" src="bundle.js"></script>
 
       </html>
@@ -297,6 +301,7 @@
       // TODO: precisely delete files in output folder
       const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
+
       // TODO: module exports
       module.exports = {
         // 定义应用入口
@@ -305,23 +310,26 @@
         // 定义应用出口
         output: {
           filename: "bundle.js",
-          path: path.resolve(__dirname,"dist"),
+          path: path.resolve(__dirname, "dist")
           // clean 被 CleanWebpackPlugin 代替
           // clean: true
         },
-        // TODO:CopyWebpackPlugin
         plugins: [
+          // TODO:CopyWebpackPlugin
           // plugins 的指定路径跟随 output 的路径
           new CleanWebpackPlugin({
             // */** 删除文件夹 **/* 删除文件 !代表保留文件
-            cleanOnceBeforeBuildPatterns: ["*/**", "**/*", "!保留的文件.js"]
+            // cleanOnceBeforeBuildPatterns:["*/**", "**/*", "!保留的文件.js"],
+            cleanOnceBeforeBuildPatterns: ["*", "*/*", "!保留的文件.js"]
           }),
           new CopyWebpackPlugin({
             patterns: [
-              {
-                from: "src/index.html",
-                to: "index.html"
-              }
+        {
+          // from: "src/index.html",
+          from: path.resolve(__dirname, "src/index.html"),
+          // plugins 的指定路径跟随 output 的路径
+          to: "index.html"
+        }
             ]
           })
         ]
@@ -351,14 +359,21 @@
         }
       }
       ```
-  
-  7. 执行指令
+
+  7. 创建测试文件跟文件夹，给 clean-webpack-plugin 使用
+
+      ``` sh
+      touch dist/"保留的文件.js" && touch dist/testCleanWebpackPlugin.js && mkdir -p dist/Test && touch dist/Test/testCleanWebpackPlugin.js
+      ```
+
+  8. 执行指令
 
       ``` sh
       npm run build
+      tree dist
       ```
 
-  8. 运行项目
+  9. 运行项目
 
       ``` bash
       edge dist/index.html
@@ -419,10 +434,13 @@
       </head>
 
       <body>
+
         <h3>Webpack Web App</h3>
 
         <p></p>
+
       </body>
+
       <script type="text/javascript" src="bundle-ts.js"></script>
 
       </html>

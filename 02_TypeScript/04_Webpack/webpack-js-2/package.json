@@ -1,18 +1,19 @@
 {
   "name": "webpack-js-2",
   "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "MatchaEggTart",
+  "type": "commonjs",
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
   },
-  "author": "MatchaEggTart",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^12.0.2",
     "webpack": "^5.97.1",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^6.0.1"
   }
 }
