@@ -1,5 +1,5 @@
 // TODO: define variable
-var s = "Hello, this is Webpack App.";
+let s = "Hello, this is Webpack App.";
 
 // TODO: print
 console.log(s);

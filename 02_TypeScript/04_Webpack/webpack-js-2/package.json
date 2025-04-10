@@ -2,7 +2,7 @@
   "name": "webpack-js-2",
   "version": "1.0.0",
   "description": "",
-  "license": "ISC",
+  "license": "MIT",
   "author": "MatchaEggTart",
   "type": "commonjs",
   "main": "webpack.config.js",
@@ -12,8 +12,8 @@
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^12.0.2",
-    "webpack": "^5.97.1",
+    "copy-webpack-plugin": "^13.0.0",
+    "webpack": "^5.99.5",
     "webpack-cli": "^6.0.1"
   }
 }

@@ -135,13 +135,14 @@
 
       ``` js
       // TODO: define variable
-      var s = "Hello, this is Webpack App.";
+      let s = "Hello, this is Webpack App.";
 
       // TODO: print
       console.log(s);
 
       // document operation
       document.getElementsByTagName('p')[0].innerText = s;
+
       ```
 
   4. webpack-js/dist/index.html
@@ -150,20 +151,23 @@
       <!DOCTYPE html>
       <html lang="en">
         <head>
-          <meta charset="UTF-8"/>
+          <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
           <title>Webpack Web App</title>
+          <!-- <link href="css/style.css" rel="stylesheet"> -->
         </head>
         <body>
 
           <h3>Webpack Web App</h3>
-
+          
           <p></p>
-
+        
         </body>
-
+        
         <script type="text/javascript" src="bundle.js"></script>
+
       </html>
+
       ```
 
   5. 创建 webpack.config.js 配置文件，通过 module.export 导出一组配置信息，属性 entry 中定义了应用入口（'./src/index.js'），属性 output 中定义了应用出口（'bundle.js'）
@@ -324,16 +328,17 @@
           }),
           new CopyWebpackPlugin({
             patterns: [
-        {
-          // from: "src/index.html",
-          from: path.resolve(__dirname, "src/index.html"),
-          // plugins 的指定路径跟随 output 的路径
-          to: "index.html"
-        }
+              {
+                // from: "src/index.html",
+                from: path.resolve(__dirname, "src/index.html"),
+                // plugins 的指定路径跟随 output 的路径
+                to: "index.html"
+              }
             ]
           })
         ]
       }
+
       ```
 
   6. 将 webpack 配置接入项目的 package.json 配置文件的 scripts 字段
